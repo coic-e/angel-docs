@@ -68,6 +68,7 @@ jobs:
           static_site_generator: next
       - name: Build with Next.js
         run: pnpm next build
+        
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
