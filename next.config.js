@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export', 
+  output: "export",
   reactStrictMode: true,
   images: {
     unoptimized: true
@@ -8,4 +8,4 @@ const nextConfig = {
   basePath: process.env.NODE_ENV === "production" ? "/angel-docs" : ""
 }
 
-export default nextConfig
+module.exports = nextConfig
