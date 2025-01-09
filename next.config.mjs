@@ -24,6 +24,7 @@ const nextConfig = {
       }
     ]
   },
+  basePath: process.env.NODE_ENV === 'production' ? '/angel-docs' : '',
 }
 
 export default nextConfig
