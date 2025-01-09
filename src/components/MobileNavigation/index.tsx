@@ -1,5 +1,3 @@
-"use client"
-
 import {
   Dialog,
   DialogBackdrop,
@@ -11,6 +9,7 @@ import { usePathname, useSearchParams } from "next/navigation"
 import {
   ComponentPropsWithoutRef,
   createContext,
+  MouseEvent,
   Suspense,
   useContext,
   useEffect,
@@ -101,8 +100,8 @@ function MobileNavigationDialog({
         <TransitionChild>
           <motion.div
             layoutScroll
-            className="ring-zinc-900/7.5 fixed bottom-0 left-0 top-14 w-full overflow-y-auto bg-white px-4 pb-4 pt-6 shadow-lg shadow-zinc-900/10 ring-1 duration-500 ease-in-out data-[closed]:-translate-x-full dark:bg-zinc-900 dark:ring-zinc-800 min-[416px]:max-w-sm sm:px-6 sm:pb-10">
-            <Navigation />
+            className="fixed bottom-0 left-0 top-14 w-full overflow-y-auto bg-white px-4 pb-4 pt-6 shadow-lg shadow-zinc-900/10 ring-1 ring-zinc-900/7.5 duration-500 ease-in-out data-[closed]:-translate-x-full min-[416px]:max-w-sm sm:px-6 sm:pb-10 dark:bg-zinc-900 dark:ring-zinc-800">
+            {/* <Navigation /> */}
           </motion.div>
         </TransitionChild>
       </DialogPanel>

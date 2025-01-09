@@ -18,7 +18,6 @@ interface Post {
 interface TransformedPost {
   objectID: string
   title: string
-  main_class: string
   description: string
   content: string
   fields: {
@@ -33,7 +32,6 @@ function transformPostsToSearchObjects(posts: Post[]): TransformedPost[] {
     return {
       objectID: slugify(post.frontmatter.title, { lower: true, strict: true }),
       title: post.frontmatter.title,
-      main_class: post.frontmatter["main-class"],
       description: post.frontmatter.description,
       content: post.content.substr(0, 5000),
       fields: {
