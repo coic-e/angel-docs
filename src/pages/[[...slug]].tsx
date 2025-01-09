@@ -23,29 +23,28 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({ params }) => {
   const navigation = generateNavigation(posts) || []
   const defaultSlug = "getting-started-with-rust"
 
-  // For the root path, redirect to the default slug
+  // for the root path or empty slug, render default content
   if (!params?.slug) {
+    const defaultPost = getPostBySlug(defaultSlug)
+    if (defaultPost) {
+      defaultPost.content = await markdownToHtml(defaultPost.content || "")
+    }
     return {
-      redirect: {
-        destination: `/${defaultSlug}`,
-        permanent: false
+      props: {
+        posts,
+        navigation,
+        currentPost: defaultPost
       }
     }
   }
 
-  // Handle other paths
+  // handle other paths
   const slug = Array.isArray(params.slug) ? params.slug.join("/") : params.slug
   let currentPost = getPostBySlug(slug)
 
-  // If post not found, fallback to default post
+  // if post not found fallback to default post
   if (!currentPost) {
     currentPost = getPostBySlug(defaultSlug)
-    return {
-      redirect: {
-        destination: `/${defaultSlug}`,
-        permanent: false
-      }
-    }
   }
 
   if (currentPost) {
