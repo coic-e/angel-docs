@@ -13,7 +13,6 @@ interface PageProps {
 }
 
 export default function Page({ posts, navigation, currentPost }: PageProps) {
-  // if (navigation) return <p>{JSON.stringify(navigation, null, 2)}</p>
   return (
     <Home posts={posts} navigation={navigation} currentPost={currentPost} />
   )
@@ -22,17 +21,31 @@ export default function Page({ posts, navigation, currentPost }: PageProps) {
 export const getStaticProps: GetStaticProps<PageProps> = async ({ params }) => {
   const posts = getAllPosts()
   const navigation = generateNavigation(posts) || []
+  const defaultSlug = "getting-started-with-rust"
 
-  // Handle the slug parameter
-  const slugParam = params?.slug as string[]
-  const slugPath = Array.isArray(slugParam) ? slugParam.join("/") : slugParam
+  // For the root path, redirect to the default slug
+  if (!params?.slug) {
+    return {
+      redirect: {
+        destination: `/${defaultSlug}`,
+        permanent: false
+      }
+    }
+  }
 
-  // If no slug or empty slug, set to "getting-started-with-rust"
-  let currentPost: Post | null = null
-  if (!slugPath || slugPath === "") {
-    currentPost = getPostBySlug("getting-started-with-rust")
-  } else {
-    currentPost = getPostBySlug(slugPath)
+  // Handle other paths
+  const slug = Array.isArray(params.slug) ? params.slug.join("/") : params.slug
+  let currentPost = getPostBySlug(slug)
+
+  // If post not found, fallback to default post
+  if (!currentPost) {
+    currentPost = getPostBySlug(defaultSlug)
+    return {
+      redirect: {
+        destination: `/${defaultSlug}`,
+        permanent: false
+      }
+    }
   }
 
   if (currentPost) {
@@ -57,7 +70,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     }
   }))
 
-  // Add home page path that will load "getting-started-with-rust"
+  // Add the root path - for [[...slug]], we use null instead of []
   paths.push({ params: { slug: [] } })
 
   return {

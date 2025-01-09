@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export', 
+  output:  process.env.NODE_ENV !== "production" ? undefined: "export", 
   reactStrictMode: true,
   images: {
     remotePatterns: [
@@ -24,7 +24,6 @@ const nextConfig = {
       }
     ]
   },
-  basePath: "angel-docs"
 }
 
 export default nextConfig
