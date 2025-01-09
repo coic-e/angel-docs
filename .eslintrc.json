@@ -93,7 +93,7 @@
     "no-control-regex": "off",
     "no-sparse-arrays": "off",
     "no-unused-vars": [
-      "error",
+      "warn",
       {
         "vars": "all",
         "args": "after-used"

@@ -1,25 +1,43 @@
+import { motion } from "framer-motion"
+import { Link } from "lucide-react"
 import { ReactNode } from "react"
 
 import { Footer } from "@/components/Footer"
 import { Header } from "@/components/Header"
+import { Logo } from "@/components/Logo"
+import { Navigation } from "@/components/Navigation"
+import { NavigationSection } from "@/types"
 
 export type BaseTemplateProps = {
   children: ReactNode
+  navigation: NavigationSection[]
 }
 
-const Base = ({ children }: BaseTemplateProps) => (
-  <>
-    <div className="fixed inset-0 flex justify-center sm:px-8">
-      <div className="flex w-full max-w-7xl lg:px-8">
-        <div className="w-full bg-white ring-1 ring-zinc-100 dark:bg-zinc-900 dark:ring-zinc-300/20" />
+const Base = ({ children, navigation }: BaseTemplateProps) => {
+  return (
+    <div className="h-full lg:ml-72 xl:ml-80">
+      <motion.header
+        layoutScroll
+        className="contents lg:pointer-events-none lg:fixed lg:inset-0 lg:z-40 lg:flex">
+        <div className="contents lg:pointer-events-auto lg:block lg:w-72 lg:overflow-y-auto lg:border-r lg:border-zinc-900/10 lg:px-6 lg:pb-8 lg:pt-4 xl:w-80 lg:dark:border-white/10">
+          <div className="hidden lg:flex">
+            <Link href="/" aria-label="Home">
+              <Logo className="h-6" />
+            </Link>
+          </div>
+          <Header />
+          <Navigation
+            navigation={navigation}
+            className="hidden lg:mt-10 lg:block"
+          />
+        </div>
+      </motion.header>
+      <div className="relative flex h-full flex-col px-4 pt-14 sm:px-6 lg:px-8">
+        <main className="flex-auto">{children}</main>
+        <Footer />
       </div>
     </div>
-    <div className="relative flex w-full flex-col">
-      <Header />
-      <main className="flex-auto">{children}</main>
-      <Footer />
-    </div>
-  </>
-)
+  )
+}
 
 export default Base

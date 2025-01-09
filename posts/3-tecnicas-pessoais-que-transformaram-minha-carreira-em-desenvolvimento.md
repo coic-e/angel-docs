@@ -13,8 +13,7 @@ tags:
   - javascript
   - coding
   - react
-categories:
-  - javascript
+category: javascript
 ---
 
 ![](/assets/img/imagem_2024-02-04_202622872.png "Evoluindo na Programação: Lições de um Full Stack")

@@ -3,7 +3,7 @@ import slugify from "slugify"
 
 interface PostFrontmatter {
   title: string
-  "main-class": string
+  tag: string
   description: string
   date: string
 }

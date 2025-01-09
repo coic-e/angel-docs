@@ -2,34 +2,82 @@ import clsx from "clsx"
 import Link from "next/link"
 import { ComponentPropsWithoutRef } from "react"
 
+function ArrowIcon(props: ComponentPropsWithoutRef<"svg">) {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" {...props}>
+      <path
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="m11.5 6.5 3 3.5m0 0-3 3.5m3-3.5h-9"
+      />
+    </svg>
+  )
+}
+
 const variantStyles = {
   primary:
-    "bg-zinc-800 font-semibold text-zinc-100 hover:bg-zinc-700 active:bg-zinc-800 active:text-zinc-100/70 dark:bg-zinc-700 dark:hover:bg-zinc-600 dark:active:bg-zinc-700 dark:active:text-zinc-100/70",
+    "rounded-full bg-zinc-900 py-1 px-3 text-white hover:bg-zinc-700 dark:bg-emerald-400/10 dark:text-emerald-400 dark:ring-1 dark:ring-inset dark:ring-emerald-400/20 dark:hover:bg-emerald-400/10 dark:hover:text-emerald-300 dark:hover:ring-emerald-300",
   secondary:
-    "bg-zinc-50 font-medium text-zinc-900 hover:bg-zinc-100 active:bg-zinc-100 active:text-zinc-900/60 dark:bg-zinc-800/50 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-zinc-50 dark:active:bg-zinc-800/50 dark:active:text-zinc-50/70"
+    "rounded-full bg-zinc-100 py-1 px-3 text-zinc-900 hover:bg-zinc-200 dark:bg-zinc-800/40 dark:text-zinc-400 dark:ring-1 dark:ring-inset dark:ring-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-zinc-300",
+  filled:
+    "rounded-full bg-zinc-900 py-1 px-3 text-white hover:bg-zinc-700 dark:bg-emerald-500 dark:text-white dark:hover:bg-emerald-400",
+  outline:
+    "rounded-full py-1 px-3 text-zinc-700 ring-1 ring-inset ring-zinc-900/10 hover:bg-zinc-900/2.5 hover:text-zinc-900 dark:text-zinc-400 dark:ring-white/10 dark:hover:bg-white/5 dark:hover:text-white",
+  text: "text-emerald-500 hover:text-emerald-600 dark:text-emerald-400 dark:hover:text-emerald-500"
 }
 
 type ButtonProps = {
   variant?: keyof typeof variantStyles
+  arrow?: "left" | "right"
 } & (
-  | (ComponentPropsWithoutRef<"button"> & { href?: undefined })
   | ComponentPropsWithoutRef<typeof Link>
+  | (ComponentPropsWithoutRef<"button"> & { href?: undefined })
 )
 
 export function Button({
   variant = "primary",
   className,
+  children,
+  arrow,
   ...props
 }: ButtonProps) {
   className = clsx(
-    "inline-flex items-center gap-2 justify-center rounded-md py-2 px-3 text-sm outline-offset-2 transition active:transition-none",
+    "inline-flex gap-0.5 justify-center overflow-hidden text-sm font-medium transition",
     variantStyles[variant],
     className
   )
 
-  return typeof props.href === "undefined" ? (
-    <button className={className} {...props} />
-  ) : (
-    <Link className={className} {...props} />
+  const arrowIcon = (
+    <ArrowIcon
+      className={clsx(
+        "mt-0.5 h-5 w-5",
+        variant === "text" && "relative top-px",
+        arrow === "left" && "-ml-1 rotate-180",
+        arrow === "right" && "-mr-1"
+      )}
+    />
+  )
+
+  const inner = (
+    <>
+      {arrow === "left" && arrowIcon}
+      {children}
+      {arrow === "right" && arrowIcon}
+    </>
+  )
+
+  if (typeof props.href === "undefined") {
+    return (
+      <button className={className} {...props}>
+        {inner}
+      </button>
+    )
+  }
+
+  return (
+    <Link className={className} {...props}>
+      {inner}
+    </Link>
   )
 }

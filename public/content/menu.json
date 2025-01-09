@@ -1,0 +1,49 @@
+{
+  "items": [
+    {
+      "title": "Guides",
+      "slug": "guides",
+      "order": 1,
+      "submenu": [
+        {
+          "title": "Introduction",
+          "slug": "introduction",
+          "order": 1
+        },
+        {
+          "title": "Quickstart",
+          "slug": "quickstart",
+          "order": 2
+        },
+        {
+          "title": "Authentication",
+          "slug": "authentication",
+          "order": 3,
+          "tag": "new"
+        }
+      ]
+    },
+    {
+      "title": "Resources",
+      "slug": "resources",
+      "order": 2,
+      "submenu": [
+        {
+          "title": "Contacts",
+          "slug": "contacts",
+          "order": 1
+        },
+        {
+          "title": "Conversations",
+          "slug": "conversations",
+          "order": 2
+        },
+        {
+          "title": "Messages",
+          "slug": "messages",
+          "order": 3
+        }
+      ]
+    }
+  ]
+}

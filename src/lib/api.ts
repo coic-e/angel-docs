@@ -1,3 +1,4 @@
+import { format } from "date-fns"
 import fs from "fs"
 import matter from "gray-matter"
 import { join } from "path"
@@ -17,7 +18,10 @@ export function getPostBySlug(slug: string): Post | null {
 
     const postData = data as Post["frontmatter"]
 
-    const date = new Date(postData.date).toString()
+    const date = format(
+      new Date(postData.date).toString(),
+      "MM/dd/yyyy"
+    ).toString()
 
     return {
       slug: realSlug,
@@ -26,7 +30,8 @@ export function getPostBySlug(slug: string): Post | null {
         ...postData,
         date
       },
-      content
+      content,
+      category: postData.category
     }
   } catch (error) {
     console.error("Error reading the file:", error)

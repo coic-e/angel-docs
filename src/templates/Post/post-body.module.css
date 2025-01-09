@@ -1,7 +1,9 @@
+/* Base content styles */
 .content {
-  @apply text-lg leading-relaxed text-white dark:text-gray-200;
+  @apply text-lg leading-relaxed text-gray-800 dark:text-gray-200;
 }
 
+/* Text elements */
 .content p,
 .content ul,
 .content ol,
@@ -10,12 +12,13 @@
 }
 
 .content a {
-  @apply text-blue-600 hover:underline dark:text-blue-400;
+  @apply text-blue-500 transition-colors duration-200 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300;
 }
 
+/* Lists */
 .content ul,
 .content ol {
-  @apply pl-6;
+  @apply pl-6 space-y-2;
 }
 
 .content ul {
@@ -35,108 +38,75 @@
   list-style: circle;
 }
 
+/* Headings */
 .content h2 {
-  @apply mb-4 mt-12 border-b border-gray-300 pb-2 text-2xl font-bold dark:border-gray-700;
+  @apply mb-6 mt-12 border-b border-gray-200 pb-2 text-3xl font-bold tracking-tight dark:border-gray-700;
 }
 
 .content h3 {
-  @apply mb-4 mt-8 text-xl font-semibold;
+  @apply mb-4 mt-8 text-2xl font-semibold tracking-tight;
 }
 
 .content h4 {
-  @apply mb-4 mt-6 text-lg font-medium;
+  @apply mb-4 mt-6 text-xl font-medium tracking-tight;
 }
 
+/* Code blocks */
 .content pre {
-  @apply my-6 overflow-x-auto rounded-lg bg-gray-900 p-4 shadow-lg;
-  box-shadow:
-    0 0 10px rgba(0, 255, 255, 0.2),
-    0 0 20px rgba(0, 255, 255, 0.1);
-  background-image: linear-gradient(
+  @apply my-6 overflow-x-auto rounded-lg bg-gray-900 p-5;
+  background: linear-gradient(
     to bottom,
-    transparent 50%,
-    rgba(0, 255, 255, 0.03) 50%
+    rgb(17, 24, 39),
+    rgb(31, 41, 55)
   );
-  background-size: 100% 4px;
-  background-repeat: repeat-y;
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06),
+    inset 0 2px 4px 0 rgba(255, 255, 255, 0.06);
 }
 
 .content code {
-  @apply rounded bg-gray-800 px-1.5 py-0.5 font-mono text-sm;
-  color: #00ffff;
-  text-shadow: 0 0 3px rgba(0, 255, 255, 0.5);
+  @apply rounded-md bg-gray-100 px-1.5 py-0.5 font-mono text-sm text-gray-800 dark:bg-gray-800 dark:text-gray-200;
 }
 
 .content pre code {
-  @apply block bg-transparent p-0 text-sm leading-relaxed;
-  color: #f0f0f0;
-  text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+  @apply block bg-transparent p-0 text-sm leading-relaxed text-gray-300;
+  font-family: 'JetBrains Mono', Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-.content pre code::after {
-  content: "|";
-  animation: cursor-blink 1s infinite;
-  opacity: 0;
-  color: #00ffff;
-  text-shadow: 0 0 5px rgba(0, 255, 255, 0.8);
+/* Syntax highlighting */
+.content pre code .keyword { @apply text-purple-400; }
+.content pre code .string { @apply text-green-400; }
+.content pre code .comment { @apply text-gray-500; }
+.content pre code .number { @apply text-yellow-400; }
+.content pre code .operator { @apply text-cyan-400; }
+.content pre code .function { @apply text-blue-400; }
+.content pre code .property { @apply text-red-400; }
+.content pre code .tag { @apply text-pink-400; }
+
+/* Block quotes */
+.content blockquote {
+  @apply border-l-4 border-gray-300 bg-gray-50 px-6 py-4 dark:border-gray-600 dark:bg-gray-800;
 }
 
-@keyframes cursor-blink {
-  0%,
-  100% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
+.content blockquote p {
+  @apply mt-0 italic text-gray-700 dark:text-gray-300;
+}
+
+.content blockquote cite {
+  @apply mt-2 block text-sm not-italic text-gray-600 dark:text-gray-400;
+}
+
+/* Images */
+.wp-block-image img {
+  @apply mx-auto my-8 h-auto w-full max-w-full rounded-lg;
 }
 
 .content figcaption {
   @apply mt-2 text-center text-sm text-gray-600 dark:text-gray-400;
 }
 
-.content blockquote {
-  @apply ml-0 border-l-4 border-gray-300 bg-gray-100 px-4 py-4 pl-6 italic dark:border-gray-700 dark:bg-gray-800;
-}
-
-.content blockquote p {
-  @apply mt-0;
-}
-
-.content blockquote cite {
-  @apply not-italic text-gray-600 dark:text-gray-400;
-}
-
+/* Audio */
 .content audio {
-  @apply my-4 w-full;
-}
-
-.wp-block-image img {
-  @apply mx-auto h-auto w-full max-w-full;
-}
-
-/* Syntax highlighting for code blocks */
-.content pre code .keyword {
-  color: #ff00ff;
-  text-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
-}
-.content pre code .string {
-  color: #00ff00;
-  text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
-}
-.content pre code .comment {
-  color: #888;
-  text-shadow: none;
-}
-.content pre code .number {
-  color: #ff9900;
-  text-shadow: 0 0 5px rgba(255, 153, 0, 0.5);
-}
-.content pre code .operator {
-  color: #00ffff;
-  text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
-}
-.content pre code .function {
-  color: #ff6600;
-  text-shadow: 0 0 5px rgba(255, 102, 0, 0.5);
+  @apply my-4 w-full rounded-md bg-gray-100 dark:bg-gray-800;
 }

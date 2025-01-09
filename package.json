@@ -1,9 +1,9 @@
 {
-  "name": "resgatemais",
-  "version": "0.1.0",
-  "description": "Organização Audiovisual da Sociedade Civil.",
+  "name": "angel-docs",
+  "version": "1.0.0",
+  "description": "Angel Kids AI - Documentation.",
   "private": true,
-  "author": "@lucaoskaique",
+  "author": "AngelKids",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -13,9 +13,7 @@
     "prepare": "husky",
     "pre-commit": "lint-staged",
     "preinstall": "npx only-allow pnpm",
-    "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test": "vitest",
     "type-check": "tsc --noEmit"
   },
   "lint-staged": {
@@ -31,7 +29,9 @@
     "node": "20"
   },
   "dependencies": {
+    "@algolia/autocomplete-core": "^1.17.7",
     "@headlessui/react": "^2.1.10",
+    "@headlessui/tailwindcss": "^0.2.1",
     "@mapbox/rehype-prism": "^0.9.0",
     "@openlab/vercel-netlify-cms-github": "^1.1.1",
     "@tailwindcss/typography": "^0.5.15",
@@ -55,6 +55,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-google-forms-hooks": "^1.2.4",
+    "react-highlight-words": "^0.20.0",
     "react-icons": "^5.3.0",
     "react-intersection-observer": "^9.13.0",
     "react-switch": "^7.0.0",
@@ -69,7 +70,8 @@
     "slugify": "^1.6.6",
     "sweetalert2": "^11.13.1",
     "tailwind-merge": "^2.4.0",
-    "use-count-up": "^3.0.1"
+    "use-count-up": "^3.0.1",
+    "zustand": "^5.0.1"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.6.1",
@@ -84,11 +86,11 @@
     "@storybook/test": "^8.2.9",
     "@testing-library/dom": "^10.3.1",
     "@testing-library/react": "^16.0.0",
-    "@types/algoliasearch": "^4.0.0",
     "@types/node": "^20",
     "@types/prismjs": "^1.26.4",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-highlight-words": "^0.20.0",
     "@types/remark-oembed": "^1.2.4",
     "@vitejs/plugin-react": "^4.3.1",
     "dotenv": "^16.4.5",

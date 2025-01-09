@@ -1,35 +1,49 @@
-import fs from "fs"
+import { GetStaticProps } from "next"
 
-import { getAllPosts } from "@/lib/api"
-//TODO: implementar algolia
-// import { buildAlgoliaIndexes } from "@/lib/buildAlgoliaIndexes"
-import { generateRss } from "@/lib/generateRSS"
-import { generateSitemap } from "@/lib/generateSitemap"
+import { getAllPosts, getPostBySlug } from "@/lib/api"
+import markdownToHtml from "@/lib/markdownToHtml"
+import { generateNavigation } from "@/lib/menu"
 import Home from "@/templates/Home"
-import { Post } from "@/types"
+import { NavigationSection, Post } from "@/types"
 
-export default function Index({ posts }: { posts: Post[] }) {
-  // if (posts) return <p>{JSON.stringify(posts[0], null, 2)}</p>
-
-  return <Home posts={posts} />
+interface PageProps {
+  posts: Post[]
+  navigation: NavigationSection[]
+  currentPost: Post | null
 }
 
-export async function getStaticProps() {
+export default function Page({ posts, navigation, currentPost }: PageProps) {
+  // if (navigation) return <p>{JSON.stringify(navigation, null, 2)}</p>
+  return (
+    <Home posts={posts} navigation={navigation} currentPost={currentPost} />
+  )
+}
+
+export const getStaticProps: GetStaticProps<PageProps> = async ({ params }) => {
   const posts = getAllPosts()
+  const navigation = generateNavigation(posts) || []
 
-  if (process.env.NODE_ENV !== "development") {
-    await generateSitemap(posts)
+  // Handle the slug parameter
+  const slugParam = params?.slug as string[]
+  const slugPath = Array.isArray(slugParam) ? slugParam.join("/") : slugParam
 
-    const rss = await generateRss(posts)
-    fs.writeFileSync("./public/feed.xml", rss)
+  // If no slug or empty slug, set to "getting-started"
+  let currentPost: Post | null = null
+  if (!slugPath || slugPath === "") {
+    currentPost = getPostBySlug("getting-started-with-rust")
+  } else {
+    currentPost = getPostBySlug(slugPath)
+  }
 
-    //TODO: implementar algolia
-    // await buildAlgoliaIndexes(posts)
+  if (currentPost) {
+    currentPost.content = await markdownToHtml(currentPost.content || "")
   }
 
   return {
     props: {
-      posts
+      posts,
+      navigation,
+      currentPost
     }
   }
 }

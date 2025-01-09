@@ -1,21 +1,18 @@
 import "@/styles/globals.css"
 import type { AppProps } from "next/app"
-import { DefaultSeo } from "next-seo"
-import { ThemeProvider } from "next-themes"
 
-import SEO from "../../next-seo.config"
+import { Providers } from "@/contexts/providers"
+import { MenuData } from "@/types"
 
-export default function App({ Component, pageProps }: AppProps) {
+interface CustomAppProps extends AppProps {
+  menuData: MenuData
+}
+export default function App({ Component, pageProps }: CustomAppProps) {
   return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="dark"
-      enableSystem
-      disableTransitionOnChange>
-      <div className="flex w-full">
-        <DefaultSeo {...SEO} />
+    <Providers>
+      <div className="w-full">
         <Component {...pageProps} />
       </div>
-    </ThemeProvider>
+    </Providers>
   )
 }

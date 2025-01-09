@@ -4,11 +4,9 @@ export default function Document() {
   return (
     <Html lang="pt-BR" className="h-full antialiased">
       <Head />
-      <body className="h-full bg-zinc-50 dark:bg-black">
-        <div className="">
-          <Main />
-          <NextScript />
-        </div>
+      <body className="min-h-ful bg-zinc-50 dark:bg-zinc-900">
+        <Main />
+        <NextScript />
       </body>
     </Html>
   )

@@ -10,6 +10,7 @@ color: "#D6BA32"
 tags:
   - javascript
   - development
+category: javascript
 ---
 
 ![javascript mental](/assets/img/eok1jcbxeai0xui.jpg "javascript mental")
