@@ -1,8 +1,8 @@
 backend:
   name: github
   branch: main
-  repo: lucaoskaique/v2.blog.lucaskaique.com.br
-  base_url: https://lucaskaique.com.br/
+  repo: coic-e/angel-docs
+  base_url: https://coic-e.github.io/
   auth_endpoint: api/auth/
   commit_messages:
   create: Create {{collection}} “{{slug}}”
