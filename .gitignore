@@ -38,3 +38,10 @@ next-env.d.ts
 codealike.json
 *storybook.log
 .env
+
+debug/
+target/
+
+**/*.rs.bk
+
+*.pdb
